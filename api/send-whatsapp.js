@@ -1,3 +1,5 @@
+import { createClient } from '@supabase/supabase-js';
+
 export default async function handler(req, res) {
     // Only allow POST requests
     if (req.method !== 'POST') {
@@ -50,26 +52,17 @@ God bless you abundantly!
         const apiKey = process.env.EVOLUTION_API_KEY;
         const instanceName = process.env.EVOLUTION_INSTANCE_NAME || "sda_church";
 
-        // Validate Evolution API credentials
         if (!evolutionApiUrl || !apiKey) {
-            console.error('Missing Evolution API credentials in environment variables.');
+            console.error('Missing Evolution API credentials.');
             return res.status(500).json({ error: 'Server configuration error.' });
         }
 
-        // Construct the URL for Evolution API's send text endpoint
         const url = `${evolutionApiUrl}/message/sendText/${instanceName}`;
-
-        const payload = {
-            number: whatsapp,
-            text: welcomeMessage
-        };
+        const payload = { number: whatsapp, text: welcomeMessage };
 
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'apikey': apiKey,
-                'Content-Type': 'application/json'
-            },
+            headers: { 'apikey': apiKey, 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
@@ -80,7 +73,36 @@ God bless you abundantly!
             return res.status(500).json({ error: 'Failed to send message via Evolution API.' });
         }
 
-        console.log('Message sent successfully:', result);
+        console.log('WhatsApp message sent successfully:', result);
+
+        // === SAVE TO SUPABASE ===
+        const supabaseUrl = process.env.SUPABASE_URL;
+        const supabaseKey = process.env.SUPABASE_ANON_KEY;
+
+        if (!supabaseUrl || !supabaseKey) {
+            console.warn('Supabase credentials missing – skipping database insert');
+        } else {
+            const supabase = createClient(supabaseUrl, supabaseKey);
+            const { error: dbError } = await supabase
+                .from('visitors')
+                .insert([
+                    {
+                        full_name: fullName,
+                        whatsapp: whatsapp,
+                        email: email || null,
+                        heard_from: heardFrom || null,
+                        prayer_request: prayerRequest || null
+                    }
+                ]);
+
+            if (dbError) {
+                console.error('Supabase insert error:', dbError);
+                // We don't return error to user because WhatsApp already succeeded
+            } else {
+                console.log('Visitor record saved to Supabase');
+            }
+        }
+
         return res.status(200).json({ success: true, messageId: result.key?.id });
 
     } catch (error) {
