@@ -2,6 +2,8 @@
 
 A web form for Seventh-day Adventist churches to capture visitor details during services. Visitors scan a QR code, submit their info, and instantly receive a WhatsApp message with church contacts (head elder, deacon, address, service times).
 
+**Live Demo:** [https://sda-visitor-website.vercel.app/](https://sda-visitor-website.vercel.app/)
+
 ## Features
 
 - 📱 Responsive design (mobile/desktop)
@@ -29,6 +31,8 @@ A web form for Seventh-day Adventist churches to capture visitor details during 
 - `api/send-whatsapp.js` – WhatsApp sender (Vercel function)
 
 ## Test
+
+Visit the live site: [https://sda-visitor-website.vercel.app/](https://sda-visitor-website.vercel.app/)
 
 Submit the form with your own WhatsApp number – you should receive the welcome message in seconds.
 
