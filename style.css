@@ -4,9 +4,21 @@
     box-sizing: border-box;
 }
 
+:root {
+    --sda-denim: #1F4A7A;
+    --sda-denim-dark: #0e2b47;
+    --sda-denim-light: #eef3fc;
+    --sda-gray: #4a5568;
+    --sda-gray-light: #f8fafc;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0b2b5c 0%, #1a4a7a 100%);
+    font-family: 'Noto Sans', sans-serif;
+    /* Background image with dark overlay for text readability */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('church-background.jpg');    
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -15,14 +27,54 @@ body {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 800px;
     width: 100%;
 }
 
+/* Brand header with logo beside title */
+.brand-header {
+    margin-bottom: 2rem;
+}
+
+.logo-title-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.sda-logo {
+    height: 80px;
+    width: auto;
+    flex-shrink: 0;
+    /* Add slight white drop shadow for visibility on dark backgrounds */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.title-group {
+    text-align: left;
+}
+
+.title-group h1 {
+    font-size: 1.9rem;
+    color: white;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.title-group p {
+    color: rgba(255,255,255,0.95);
+    font-size: 1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Card */
 .card {
     background: white;
     border-radius: 2rem;
-    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.4);
+    box-shadow: 0 25px 45px -12px rgba(0,0,0,0.5);
     overflow: hidden;
     padding: 2rem 2rem 2.5rem;
     transition: transform 0.2s;
@@ -32,24 +84,19 @@ body {
     transform: scale(1.01);
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 2rem;
+/* Two-column grid for form fields */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
 }
 
-.header h1 {
-    font-size: 2rem;
-    color: #0b2b5c;
-    margin-bottom: 0.5rem;
-}
-
-.header p {
-    color: #4a5568;
-    font-size: 1rem;
+.full-width {
+    grid-column: span 2;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
 }
 
 label {
@@ -63,7 +110,7 @@ input, select, textarea {
     width: 100%;
     padding: 0.9rem 1rem;
     font-size: 1rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     border: 2px solid #e2e8f0;
     border-radius: 1rem;
     transition: all 0.2s;
@@ -72,8 +119,8 @@ input, select, textarea {
 
 input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: #0b2b5c;
-    box-shadow: 0 0 0 3px rgba(11,43,92,0.2);
+    border-color: var(--sda-denim);
+    box-shadow: 0 0 0 3px rgba(31,74,122,0.2);
 }
 
 small {
@@ -85,7 +132,7 @@ small {
 
 button {
     width: 100%;
-    background: #0b2b5c;
+    background: var(--sda-denim);
     color: white;
     border: none;
     padding: 1rem;
@@ -94,11 +141,11 @@ button {
     border-radius: 3rem;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 button:hover {
-    background: #123e6e;
+    background: var(--sda-denim-dark);
 }
 
 button:active {
@@ -126,4 +173,35 @@ button:active {
     background: #fee2e2;
     color: #991b1b;
     border-left: 4px solid #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+    .card {
+        padding: 1.5rem;
+    }
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .full-width {
+        grid-column: span 1;
+    }
+    .logo-title-group {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    .title-group {
+        text-align: center;
+    }
+    .sda-logo {
+        height: 60px;
+    }
+    .title-group h1 {
+        font-size: 1.5rem;
+    }
 }
