@@ -12,12 +12,12 @@ export default async function handler(req, res) {
     }
 
     // --- Church contact details (CUSTOMIZE THESE) ---
-    const churchName = "SDA Central Church";
-    const headElder = "Elder John Doe";
-    const headElderPhone = "+1234567890";
-    const deacon = "Deacon James Smith";
-    const deaconPhone = "+1234567891";
-    const churchAddress = "123 Main Street, City";
+    const churchName = "Middelburg City SDA Church";
+    const headElder = "Elder Isaac Fambarega";
+    const headElderPhone = "+27787866285";
+    const deacon = "Deacon W Fambarega";
+    const deaconPhone = "+27837842180";
+    const churchAddress = "1 Pearl street, Middelburg, Mpumalanga, South Africa";
     const serviceTimes = "Sabbath School: 9:30 AM | Divine Service: 11:00 AM";
     // -------------------------------------------------
 
@@ -28,6 +28,7 @@ Dear ${fullName},
 
 We are thrilled that you visited us today! Here is everything you need to stay connected:
 
+🎥 *Live Stream*: https://www.facebook.com/MIDcitysdachurch
 🏛️ *Church Address*: ${churchAddress}
 🕊️ *Service Times*: ${serviceTimes}
 
@@ -36,7 +37,7 @@ We are thrilled that you visited us today! Here is everything you need to stay c
 • Deacon: ${deacon} – ${deaconPhone}
 
 📱 *WhatsApp Group*: [Join our fellowship group] (link here)
-🌐 *Website*: [yourchurchwebsite.com]
+🌐 *Website*: [churchwebsite.com]
 
 *Prayer Request received*: ${prayerRequest || 'None'}
 
