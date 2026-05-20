@@ -7,9 +7,16 @@ A web form for Seventh-day Adventist churches to capture visitor details during 
 ## Features
 
 - 📱 Responsive design (mobile/desktop)
-- 🎨 SDA Denim Blue branding + optional background image
 - 📩 Automated WhatsApp replies via Evolution API
-- ☁️ Deployed on Vercel (serverless function)
+- 🗄️ Visitor data storage with **Supabase** (PostgreSQL)
+
+## Tech Stack
+
+- **Frontend:** HTML5, CSS, JavaScript
+- **Backend:** Node.js
+- **Database:** Supabase (PostgreSQL)
+- **WhatsApp API:** Evolution API
+- **Hosting:** Vercel
 
 ## Quick Setup
 
@@ -23,19 +30,26 @@ A web form for Seventh-day Adventist churches to capture visitor details during 
 5. **Add your SDA logo** (`sda-logo.png` in root folder)
 6. **Generate a QR code** for your Vercel URL and display in church
 
-## Files
+## Database Setup (Supabase)
 
-- `index.html` – form UI
-- `style.css` – SDA styling
-- `script.js` – frontend submission
-- `api/send-whatsapp.js` – WhatsApp sender (Vercel function)
-
-## Test
-
-Visit the live site: [https://sda-visitor-website.vercel.app/](https://sda-visitor-website.vercel.app/)
+1.  Create a free account at [supabase.com](https://supabase.com).
+2.  Create a new project.
+3.  In the SQL Editor, run the following command to create the `visitors` table:
+    ```sql
+    CREATE TABLE visitors (
+        id BIGSERIAL PRIMARY KEY,
+        full_name TEXT NOT NULL,
+        whatsapp TEXT NOT NULL,
+        email TEXT,
+        heard_from TEXT,
+        prayer_request TEXT,
+        created_at TIMESTAMPTZ DEFAULT NOW()
+    );
 
 Submit the form with your own WhatsApp number – you should receive the welcome message in seconds.
 
----
+
+## Test
+Visit the live site: [https://sda-visitor-website.vercel.app/](https://sda-visitor-website.vercel.app/)
 
 Created for local SDA church ministry. 🙏
