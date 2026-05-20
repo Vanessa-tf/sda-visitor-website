@@ -32,7 +32,7 @@ We are thrilled that you visited us today! Here is everything you need to stay c
 
 🎥 *Live Stream*: https://www.facebook.com/MIDcitysdachurch
 🏛️ *Church Address*: ${churchAddress}
-🕊️ *Service Times*: ${serviceTimes}
+🕘  *Service Times*: ${serviceTimes}
 
 📞 *Church Leaders*:
 • Head Elder: ${headElder} – ${headElderPhone}
@@ -44,7 +44,7 @@ We are thrilled that you visited us today! Here is everything you need to stay c
 *Prayer Request received*: ${prayerRequest || 'None'}
 
 God bless you abundantly!
-- ${churchName} Church Administration`;
+- ${churchName} Administration`;
 
     try {
         // === EVOLUTION API CONFIGURATION ===
